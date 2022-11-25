@@ -7,12 +7,12 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class RestFulApiUtil {
+public class HttpClientUtil {
 
     public static OkHttpClient client = new OkHttpClient();
 
     public static Response sendGetRequest(String url) {
-
+        System.out.println(String.format("calling %s Api", url));
         Request request = new Request.Builder().get()
                 .url(url)
                 .build();
@@ -21,6 +21,7 @@ public class RestFulApiUtil {
         Response response = null;
         try {
             response = call.execute();
+            System.out.println(String.format("response status code is %s", response.code()));
         } catch (IOException e) {
             throw new RuntimeException(String.format("Failed while calling %s error %s", url, e.getMessage()));
         }
